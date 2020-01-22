@@ -1,0 +1,56 @@
+<h1>user history</h1>
+
+
+<h3>created offer:</h3>
+<% createddeal.forEach(function(tran){ %>
+  <%if(tran.type=="us"){%>
+    <label for="">US dollar --> CNY </label>
+  <%}else{%>
+    <label for="">CNY --> US dollar</label>
+  <%}%>
+  <br>
+  <p>
+    <label for="">created by:  <%=tran.user_create.username%></label>
+    <br>
+    <label for="">received by:  <%=tran.user_receive.username%></label>
+    <br>
+    <label for="">amount:</label> <%= tran.amount %>
+    <label for="">unit_price:</label>
+    <%= tran.unit_price %>
+    <label for="">total price:</label>
+    <%= tran.amount*tran.unit_price %>
+    <label for="">complete date:</label>
+    <%= tran.complete_date %>
+    <br>
+    <br>
+    <br>
+  </p>
+<% }); %>
+<br>
+<br>
+
+<h3>received offer</h3>
+<% receiveddeal.forEach(function(tran){ %>
+  <%if(tran.type=="us"){%>
+    <label for="">US dollar --> CNY </label>
+  <%}else{%>
+    <label for="">CNY --> US dollar</label>
+  <%}%>
+  <br>
+  <p>
+    <label for="">created by:  <%=tran.user_create.username%></label>
+    <br>
+    <label for="">received by:  <%=tran.user_receive.username%></label>
+    <br>
+    <label for="">amount:</label> <%= tran.amount %>
+    <label for="">unit_price:</label>
+    <%= tran.unit_price %>
+    <label for="">total price:</label>
+    <%= tran.amount*tran.unit_price %>
+    <label for="">complete date:</label>
+    <%= tran.complete_date %>
+    <br>
+    <br>
+    <br>
+  </p>
+<% }); %>

@@ -1,0 +1,169 @@
+<% include ./partials/header %>
+<h1>user profile~</h1>
+
+
+  <label for="">current user:  <%=currentUser.username%></label>
+  <br>
+  <label for="">USDaccount:  <%=currentUser.USDaccount%></label>
+  <br>
+  <label for="">CNYaccount:  <%=currentUser.CNYaccount%></label>
+
+<br>
+<a href="/history/<%=currentUser._id%>">history transaction</a>
+<br>
+
+
+<h3>On going created offer:</h3>
+<% createddeal.forEach(function(tran){ %>
+  <%if(tran.type=="us"){%>
+    <label for="">US dollar --> CNY </label>
+  <%}else{%>
+    <label for="">CNY --> US dollar</label>
+  <%}%>
+  <br>
+  <p>
+    <label for="">created by:  <%=tran.user_create.username%></label>
+    <br>
+    <label for="">received by:  <%=tran.user_receive.username%></label>
+    <br>
+    <label for="">amount:</label> <%= tran.amount %>
+    <label for="">unit_price:</label>
+    <%= tran.unit_price %>
+    <label for="">total price:</label>
+    <%= tran.amount*tran.unit_price %>
+    <label for="">status:</label>
+    <%= tran.status %>
+    <br>
+
+    <%if(tran.type=="us"){%>
+      <%if(tran.status=="0"){%>
+        <p>please pay USD to middle account</p>
+        <a href="/<%=tran._id%>/addone">I have send it</a>
+      <%}else if(tran.status=="1"){%>
+        <p>wait for middle account confirm </p>
+      <%}else if(tran.status=="2"){%>
+        <p>middle account confirmed, wait for the transfer of the CNY</p>
+      <%}else if(tran.status=="3"){%>
+        <p>CNY transfered, please confirm</p>
+        <a href="/<%=tran._id%>/addone">confirm</a>
+      <%}else if(tran.status=="4"){%>
+        <p>wait for middle account transfer USD to buyer</p>
+      <%}else if(tran.status=="5"){%>
+        <p>wait for buyers confirm receive</p>
+      <%}else if(tran.status=="6"){%>
+        <p>please give your review</p>
+        <a href="/<%=tran._id%>/addone">review</a>
+      <%}else if(tran.status=="7"){%>
+        <p>transaction end</p>
+        <a href="/<%=tran._id%>/archive">archive</a>
+      <%}%>
+    <%}%>
+    <%if(tran.type=="cn"){%>
+      <%if(tran.status=="0"){%>
+        <p>wait for offer creator transfering USD to middle account</p>
+      <%}else if(tran.status=="1"){%>
+        <p>wait for middle account confirm </p>
+      <%}else if(tran.status=="2"){%>
+        <p>please send CNY to buyers account</p>
+        <a href="/<%=tran._id%>/addone">I have send it</a>
+      <%}else if(tran.status=="3"){%>
+        <p>wait for offer creator to confirm receive</p>
+      <%}else if(tran.status=="4"){%>
+        <p>wait for middle account transfer USD to you</p>
+      <%}else if(tran.status=="5"){%>
+        <p>please confirm USD received</p>
+        <a href="/<%=tran._id%>/addone">I have received USD</a>
+      <%}else if(tran.status=="6"){%>
+        <p>please give your review</p>
+        <a href="/<%=tran._id%>/addone">review</a>
+      <%}else if(tran.status=="7"){%>
+        <p>transaction end</p>
+        <a href="/<%=tran._id%>/archive">archive</a>
+      <%}%>
+    <%}%>
+
+    <br>
+    <br>
+  </p>
+<% }); %>
+<br>
+<br>
+
+<h3>On going received offer</h3>
+<% receiveddeal.forEach(function(tran){ %>
+  <%if(tran.type=="us"){%>
+    <label for="">US dollar --> CNY </label>
+  <%}else{%>
+    <label for="">CNY --> US dollar</label>
+  <%}%>
+  <br>
+  <p>
+    <label for="">created by:  <%=tran.user_create.username%></label>
+    <br>
+    <label for="">received by:  <%=tran.user_receive.username%></label>
+    <br>
+    <label for="">amount:</label> <%= tran.amount %>
+    <label for="">unit_price:</label>
+    <%= tran.unit_price %>
+    <label for="">total price:</label>
+    <%= tran.amount*tran.unit_price %>
+    <label for="">status:</label>
+    <%= tran.status %>
+    <br>
+
+    <%if(tran.type=="us"){%>
+      <%if(tran.status=="0"){%>
+        <p>wait for creator transfer USD to middle account</p>
+      <%}else if(tran.status=="1"){%>
+        <p>wait for middle account confirm</p>
+      <%}else if(tran.status=="2"){%>
+        <p>please send CNY to buyers account</p>
+        <a href="/<%=tran._id%>/addone">I have send it</a>
+      <%}else if(tran.status=="3"){%>
+        <p>wait for buyer to confirm receive</p>
+      <%}else if(tran.status=="4"){%>
+        <p>wait for middle account transfer USD to you</p>
+      <%}else if(tran.status=="5"){%>
+        <p>please confirm USD received</p>
+        <a href="/<%=tran._id%>/addone">confirm</a>
+      <%}else if(tran.status=="6"){%>
+        <p>please give your review</p>
+        <a href="/<%=tran._id%>/addone">review</a>
+      <%}else if(tran.status=="7"){%>
+        <p>transaction end</p>
+        <a href="/<%=tran._id%>/archive">archive</a>
+      <%}%>
+    <%}%>
+
+    <%if(tran.type=="cn"){%>
+      <%if(tran.status=="0"){%>
+        <p>please pay USD to middle account</p>
+        <a href="/<%=tran._id%>/addone">I have send it</a>
+      <%}else if(tran.status=="1"){%>
+        <p>wait for middle account confirm</p>
+      <%}else if(tran.status=="2"){%>
+        <p>middle account confirmed, wait for the transfer of the CNY</p>
+      <%}else if(tran.status=="3"){%>
+        <p>CNY transfered, please confirm</p>
+        <a href="/<%=tran._id%>/addone">confirm</a>
+      <%}else if(tran.status=="4"){%>
+        <p>wait for middle account transfer USD to creator account</p>
+      <%}else if(tran.status=="5"){%>
+        <p>wait for confirm of USD received</p>
+      <%}else if(tran.status=="6"){%>
+        <p>please give your review</p>
+        <a href="/<%=tran._id%>/addone">review</a>
+      <%}else if(tran.status=="7"){%>
+        <p>transaction end</p>
+        <a href="/<%=tran._id%>/archive">archive</a>
+      <%}%>
+    <%}%>
+
+
+    <br>
+    <br>
+  </p>
+<% }); %>
+
+
+<% include ./partials/footer %>

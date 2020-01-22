@@ -1,0 +1,28 @@
+<% include ./partials/header %>
+
+<h1 >Start a New transaction!~</h1>
+<script type="text/javascript">
+  // alert("hello");
+</script>
+
+<form class="" action="/newTrans" method="post">
+
+<div>
+  <input type="radio" id="contactChoice1"
+   name="trans_type" value="us">
+  <label for="">US dollar --> CNY</label>
+<br>
+  <input type="radio" id="contactChoice2"
+   name="trans_type" value="cn">
+  <label for="">CNY --> US dollar</label>
+
+</div>
+  <label for="">input amount:</label>
+  <input type="string" name="amount" placeholder="amount" value="">
+  <br>
+  <label for="">input unit price:</label>
+  <input type="string" name="unit_price" placeholder="unit price" value="">
+  <br>
+  <button type="submit" name="button">submit</button>
+</form>
+<% include ./partials/footer %>

@@ -1,0 +1,52 @@
+<% include ./partials/header %>
+<h1>home page</h1>
+<%if(!currentUser){%>
+  <label for="">please login!</label>
+<%}else{%>
+<label for="">current user:  <%=currentUser.username%></label>
+<%}%>
+
+<%if(!currentUser){%>
+<br>
+<a href="/login">login</a>
+<br>
+<a href="/register">sign up</a>
+<%}else{%>
+<br>
+<a href="/logout">logout</a>
+<br>
+<a href="/userprofile/<%=currentUser._id%>">user profile</a>
+<br>
+<%}%>
+<br>
+<br>
+<a href="/newTrans">create a new offer</a>
+<br>
+<br>
+<br>
+<% trans.forEach(function(tran){ %>
+  <%if(tran.type=="us"){%>
+    <label for="">US dollar --> CNY </label>
+  <%}else{%>
+    <label for="">CNY --> US dollar</label>
+  <%}%>
+  <br>
+  <p>
+    <label for="">created by <%=tran.user_create.username%></label>
+    <br>
+    <label for="">amount:</label> <%= tran.amount %>
+    <label for="">unit_price:</label>
+    <%= tran.unit_price %>
+    <label for="">total price:</label>
+    <%= tran.amount*tran.unit_price %>
+    <%if(currentUser){%>
+    <a href="/userprofile/<%=currentUser._id%>/<%=tran._id%>" class="btn btn-primary">accept</a>
+    <%}%>
+    <br>
+    <br>
+  </p>
+
+
+<% }); %>
+
+<% include ./partials/footer %>
